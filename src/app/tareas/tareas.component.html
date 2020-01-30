@@ -1,0 +1,73 @@
+<div class="container">
+  <!-- Note menu -->
+  <div class="row" style="margin-top:12px;">
+    <div class="col-md-8">
+      <input type="text"
+             class="form-control"
+             style="width: 100%;"
+             placeholder="Buscar tarea...">
+    </div>
+    <div class="col-md-4">
+        <app-modal-tarea></app-modal-tarea> 
+        <button type="buton"
+                class="btn btn-info pull-right"
+                style="margin-left:5px;"><i class="fa fa-plug" (click)="this.sendLogout()"></i>
+        </button>   
+        <button type="buton"
+                class="btn btn-info pull-right"
+                (click)="sendFile()"
+                style="margin-left:5px; background-color: orange; border-color: orange;"><i class="fa fa-plus"></i> Nuevo archivo
+        </button> 
+    </div>
+
+  </div>
+
+  <!-- WS3270 content -->
+  <div class="row" style="margin-top: 28px;">
+    <!-- WS3270 Menu -->
+    <div class="col-md-3">
+      <br>
+      <div class="list-group list-group-flush">
+        <a class="list-group-item list-group-item-action">
+          <i class="fa fa-book"></i>&nbsp;WS3270
+        </a>
+      </div>
+    </div>
+
+    <!-- Tareas Panel -->
+    <div class="col-md-9">
+      <div class="row">
+        <div class="col-md-12">
+            <div class="container" style="margin-top: 24px;">              
+            <div class="panel-body table-responsive">
+                <table class="table table-striped table-bordered table-list">
+                    <!-- Tasks list -->
+                    <thead>
+                        <tr> 
+                            <th> #</th>
+                            <th> Nombre</th>
+                            <th> Descripcion</th>
+                            <th><em class="fa fa-calendar"></em></th>
+                            <th><em class="fa fa-cog"></em></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let tarea of tareas">
+                            <td><input [(ngModel)]="tarea.numero" class="input-label" style="width: 15px;"></td>
+                            <td><input [(ngModel)]="tarea.nombre" class="input-label"></td>
+                            <td><input [(ngModel)]="tarea.descripcion" class="input-label"></td>
+                            <td><input [(ngModel)]="tarea.fecha" class="input-label"></td>
+                            <td><a (click)="deleteTask(tarea)" class="pull-right text-danger"><i class="fa fa-trash-o"></i></a></td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div *ngIf="this.getLengthTasks() == 0" class="alert alert-warning" role="alert">
+                    No existen tareas para mostrar :(
+                </div>
+            </div>
+            </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

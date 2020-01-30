@@ -1,0 +1,85 @@
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<ng-template #content let-modal>
+  <div class="modal-header">
+    <h5 class="modal-title" id="modal-basic-title">Nueva Tarea</h5>
+    <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <form novalidate name="form" #t="ngForm" (ngSubmit)="t.form.valid && tareasComponent.sendTarea()" class="tarea-form">
+        <!-- Numero -->
+        <div class="form-group">
+          <label for="nombre">Numero</label>
+            <div class="input-group">
+                <input type="text"
+                        id="numero"
+                        class="form-control"
+                        name="numero"
+                        placeholder="Numero"
+                        [(ngModel)]="tareasComponent.model.numero"
+                        #numero="ngModel"
+                        [ngClass]="{ 'is-invalid': t.submitted && numero.invalid }"
+                        required/>
+                <!-- input validation group -->
+                <div *ngIf="t.submitted && numero.invalid" class="invalid-input">
+                    <!-- individual validation errors -->
+                    <div *ngIf="nombre?.errors?.required">Campo necesario.</div>
+                </div>
+            </div>
+        </div>
+        <!-- Nombre -->
+        <div class="form-group">
+          <label for="nombre">Nombre</label>
+            <div class="input-group">
+                <input type="text"
+                        id="nombre"
+                        class="form-control"
+                        name="nombre"
+                        placeholder="Nombre"
+                        [(ngModel)]="tareasComponent.model.nombre"
+                        #nombre="ngModel"
+                        [ngClass]="{ 'is-invalid': t.submitted && nombre.invalid }"
+                        required/>
+                <!-- input validation group -->
+                <div *ngIf="t.submitted && nombre.invalid" class="invalid-input">
+                    <!-- individual validation errors -->
+                    <div *ngIf="nombre?.errors?.required">Campo necesario.</div>
+                </div>
+            </div>
+        </div>
+        <!-- Descripcion -->
+        <div class="form-group">
+          <label for="descripcion">Descripción</label>
+            <div class="input-group">
+                <input type="text"
+                        id="descripcion"
+                        class="form-control"
+                        name="descripcion"
+                        placeholder="Descripción"
+                        [(ngModel)]="tareasComponent.model.descripcion"
+                        #fdescripcion="ngModel"
+                        [ngClass]="{ 'is-invalid': t.submitted && fdescripcion.invalid }"
+                        required/>
+                <!-- input validation group -->
+                <div *ngIf="t.submitted && fdescripcion.invalid" class="invalid-input">
+                    <!-- individual validation errors -->
+                    <div *ngIf="fdescripcion?.errors?.required"> Campo necesario.</div>
+                </div>
+            </div>
+        </div>
+        <!-- Fecha -->
+        <div class="form-group">
+            <label for="fecha">Fecha</label>
+            <div class="input-group">
+                <input id="fecha" [ngModel]="tareasComponent.model.fecha | date:'yyyy-MM-dd'" class="form-control" type="date" name="fecha"/>
+            </div>
+        </div>
+        <button type="submit" class="btn btn-outline-dark">Añadir</button>
+    </form>
+  </div>
+</ng-template>
+
+<button type="buton" class="btn btn-info pull-right" style="margin-left:5px;" (click)="open(content)">
+    <i class="fa fa-plus"></i> Nueva tarea
+</button>

@@ -1,0 +1,49 @@
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<div class="container login-container">
+    <div class="row">
+        <div class="col-md-6 login-form">
+            <h5>¡Bienvenido, WS3270!</h5>
+            <form name="form" #f="ngForm" (ngSubmit)="f.form.valid && sendLogin()">
+                <!-- User -->
+                <div class="form-group">
+                    <input type="text" 
+                            class="form-control"
+                            name="user" 
+                            placeholder="Usuario"
+                            [(ngModel)]="user"
+                            #fuser="ngModel"                         
+                            [ngClass]="{ 'is-invalid': f.submitted && fuser.invalid }"
+                            required/>
+                    <!-- input validation group -->
+                    <div *ngIf="f.submitted && fuser.invalid" class="invalid-input">
+                        <!-- individual validation errors -->
+                        <div *ngIf="fuser?.errors?.required">Campo requerido.</div>
+                    </div>
+                    </div>
+                <!-- Password -->
+                <div class="form-group">
+                    <input type="password"
+                            id="password"
+                            class="form-control"
+                            name="password"
+                            placeholder="Contraseña"
+                            [(ngModel)]="password"
+                            #fpassword="ngModel"
+                            [ngClass]="{ 'is-invalid': f.submitted && fpassword.invalid }"
+                            required minlength="7">
+                    <!-- input validation group -->
+                    <div *ngIf="f.submitted && fpassword.invalid" class="invalid-input">
+                        <!-- individual validation errors -->
+                        <div *ngIf="fpassword?.errors?.required">Campo requerido.</div>
+                        <div *ngIf="fpassword?.errors?.minlength">Mínimo 7 caracteres.</div>
+                    </div>
+                </div>
+                <button type="submit" class="btnSubmit">
+                <i class="fa fa-envelope-o"></i>
+                <span> Iniciar sesión</span>
+                </button>
+            </form>
+        </div>
+    </div>
+</div>
